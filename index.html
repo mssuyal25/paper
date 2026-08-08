@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Papers — Mahendra Suyal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #FAF7F2;
+    color: #1C1917;
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .top-bar {
+    background: #8B1A1A;
+    color: #FAF7F2;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .top-bar a { color: #FCA5A5; text-decoration: none; }
+  .top-bar a:hover { color: #FAF7F2; }
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 72px 40px 48px;
+    border-bottom: 2px solid #1C1917;
+    width: 100%;
+  }
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8B1A1A;
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero-bio {
+    font-size: 16px;
+    color: #44403C;
+    line-height: 1.75;
+    max-width: 600px;
+  }
+  .hero-bio a { color: #8B1A1A; }
+  .papers-section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 40px 80px;
+    width: 100%;
+    flex: 1;
+  }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8B1A1A;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #D6CFC4;
+  }
+  .paper-card {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    border: 1px solid #D6CFC4;
+    margin-bottom: 16px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, transform 0.15s;
+    background: white;
+  }
+  .paper-card:hover {
+    border-color: #8B1A1A;
+    transform: translateX(4px);
+  }
+  .paper-num {
+    background: #1C1917;
+    color: #FAF7F2;
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    min-height: 100px;
+  }
+  .paper-body { padding: 20px 24px; }
+  .paper-domain {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #8B1A1A;
+    margin-bottom: 6px;
+  }
+  .paper-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1C1917;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .paper-subtitle {
+    font-size: 13px;
+    color: #78716C;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .paper-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #A8A29E;
+    letter-spacing: 0.05em;
+  }
+  .paper-meta span { color: #92400E; margin-right: 12px; }
+  .coming-soon {
+    border: 1px dashed #D6CFC4;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .coming-soon-icon {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 24px;
+    color: #D6CFC4;
+    min-width: 80px;
+    text-align: center;
+  }
+  .coming-soon-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: #78716C;
+    margin-bottom: 4px;
+    font-style: italic;
+  }
+  .coming-soon-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #D6CFC4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  footer {
+    background: #1C1917;
+    color: #78716C;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  footer a { color: #A8A29E; text-decoration: none; }
+  footer a:hover { color: #FAF7F2; }
+  @media (max-width: 600px) {
+    .hero, .papers-section { padding-left: 20px; padding-right: 20px; }
+    .top-bar { padding: 10px 20px; flex-direction: column; gap: 4px; }
+    footer { padding: 16px 20px; }
+    .paper-card { grid-template-columns: 56px 1fr; }
+    .paper-num { font-size: 20px; padding: 16px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <span>mssuyal25.github.io/paper</span>
+  <span>
+    <a href="https://linkedin.com/in/mssuyal" target="_blank">LinkedIn</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/mssuyal25" target="_blank">GitHub</a>
+  </span>
+</div>
+
+<div class="hero">
+  <div class="hero-label">Working Papers &amp; Research</div>
+  <h1>Mahendra Suyal</h1>
+  <p class="hero-bio">
+    Director of Product · Fintech &amp; Payments · PhD Candidate, Amrapali University<br>
+    Research interests: merchant economics, digital payment adoption in India, AI &amp; labour, political economy of technology.
+  </p>
+</div>
+
+<div class="papers-section">
+
+  <div class="section-label">Published Papers</div>
+
+  <a class="paper-card" href="./great-hollowing/">
+    <div class="paper-num">1</div>
+    <div class="paper-body">
+      <div class="paper-domain">Speculative Political Economy · Labour Studies · AI</div>
+      <div class="paper-title">The Great Hollowing: AI, Labour Displacement, and the Emergence of a New Class Architecture</div>
+      <div class="paper-subtitle">With Special Reference to India's Structural Vulnerability in the Age of Cognitive Automation</div>
+      <div class="paper-meta">
+        <span>Working Draft</span>
+        August 2026 · 8 Sections · Inline Citations · 20 References
+      </div>
+    </div>
+  </a>
+
+  <div class="section-label" style="margin-top: 40px;">Forthcoming</div>
+
+  <div class="coming-soon">
+    <div class="coming-soon-icon">—</div>
+    <div>
+      <div class="coming-soon-title">Merchant Economics and Acceptance of Digital Payments in India</div>
+      <div class="coming-soon-note">PhD Dissertation · Amrapali University · In Progress</div>
+    </div>
+  </div>
+
+  <div class="coming-soon">
+    <div class="coming-soon-icon">+</div>
+    <div>
+      <div class="coming-soon-title">Add a folder to /paper repository to publish next paper here</div>
+      <div class="coming-soon-note">mssuyal25.github.io/paper/your-paper-name</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>© 2026 Mahendra Suyal · Working drafts unless stated otherwise</span>
+  <span><a href="https://github.com/mssuyal25/paper" target="_blank">View source on GitHub ↗</a></span>
+</footer>
+
+</body>
+</html>
