@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Great Hollowing — AI, Labor & Class in 2075</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --paper: #FAF7F2;
+    --ink: #1C1917;
+    --ink-light: #44403C;
+    --ink-muted: #78716C;
+    --crimson: #8B1A1A;
+    --crimson-light: #B91C1C;
+    --gold: #92400E;
+    --rule: #D6CFC4;
+    --highlight: #FEF3C7;
+    --code-bg: #F3EDE4;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.85;
+    padding: 0;
+  }
+
+  /* ── HEADER ── */
+  .journal-header {
+    background: var(--crimson);
+    color: #FAF7F2;
+    text-align: center;
+    padding: 10px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .paper-cover {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 64px 32px 40px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .paper-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+
+  .subtitle {
+    font-family: 'Lora', serif;
+    font-size: 17px;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+    margin-top: 8px;
+  }
+
+  .meta-item strong { color: var(--ink); }
+
+  /* ── LAYOUT ── */
+  .paper-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* ── ABSTRACT ── */
+  .abstract-box {
+    background: var(--code-bg);
+    border-left: 3px solid var(--crimson);
+    padding: 28px 32px;
+    margin: 40px 0;
+  }
+
+  .abstract-box .section-eyebrow {
+    margin-bottom: 10px;
+    font-size: 10px;
+  }
+
+  .abstract-box p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.8;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin: 52px 0;
+  }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 20px;
+    line-height: 1.25;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+  }
+
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 28px 0 10px;
+    font-style: italic;
+  }
+
+  p { margin-bottom: 16px; color: var(--ink-light); }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* ── TRANSITION TIMELINE ── */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin: 32px 0;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .tl-era {
+    padding: 20px 16px;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+  .tl-era:last-child { border-right: none; }
+
+  .tl-era-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+  }
+
+  .tl-era-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .tl-era-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--crimson);
+    margin-bottom: 10px;
+  }
+
+  .tl-era-differentiator {
+    font-size: 12px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .tl-era-differentiator strong { color: var(--crimson); font-size: 11px; display: block; margin-bottom: 3px; }
+
+  .era-ai { background: #1C1917; }
+  .era-ai .tl-era-name, .era-ai .tl-era-num, .era-ai .tl-era-differentiator { color: #FAF7F2; }
+  .era-ai .tl-era-differentiator strong { color: #FCA5A5; }
+  .era-ai .tl-era-period { color: #FCA5A5; }
+
+  /* ── CLASS PYRAMID ── */
+  .pyramid-container {
+    margin: 32px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .class-bar {
+    display: flex;
+    align-items: stretch;
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: default;
+    transition: transform 0.15s ease;
+  }
+  .class-bar:hover { transform: translateX(4px); }
+
+  .class-bar-label {
+    width: 180px;
+    flex-shrink: 0;
+    padding: 12px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-right: none;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .class-bar-fill {
+    padding: 12px 16px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #FAF7F2;
+  }
+
+  .class-bar-fill span { font-size: 12px; opacity: 0.85; }
+
+  .bar-capital { background: #1C1917; }
+  .bar-expert  { background: #4B2020; }
+  .bar-human   { background: #7C3030; }
+  .bar-physical{ background: #92400E; }
+  .bar-displaced{ background: #A16207; color: #1C1917; }
+  .bar-displaced .class-bar-fill { color: #1C1917; }
+  .bar-displaced .class-bar-fill span { color: #3d2b00; }
+  .bar-poor    { background: #D6CFC4; }
+  .bar-poor .class-bar-fill { color: #44403C; }
+  .bar-poor .class-bar-fill span { color: #78716C; }
+
+  .class-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 14px;
+    min-width: 44px;
+    flex-shrink: 0;
+  }
+
+  /* ── DATA TABLE ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .data-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-light);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .data-table tr:nth-child(even) td { background: var(--code-bg); }
+  .data-table .risk-high { color: var(--crimson-light); font-weight: 600; }
+  .data-table .risk-med  { color: var(--gold); font-weight: 600; }
+  .data-table .risk-low  { color: #15803D; font-weight: 600; }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 4px solid var(--crimson);
+    margin: 32px 0;
+    padding: 16px 24px;
+    background: var(--highlight);
+  }
+
+  .pull-quote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .pull-quote cite {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── THINKER CARDS ── */
+  .thinker-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .thinker-card {
+    border: 1px solid var(--rule);
+    padding: 18px;
+    background: white;
+    border-radius: 2px;
+  }
+
+  .thinker-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .thinker-inst {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--crimson);
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .thinker-thesis {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .thinker-book {
+    font-size: 11px;
+    color: var(--ink-muted);
+    font-style: italic;
+    border-top: 1px solid var(--rule);
+    padding-top: 8px;
+    margin-top: 4px;
+  }
+
+  /* ── READING LIST ── */
+  .reading-tier {
+    margin: 20px 0;
+  }
+
+  .reading-tier-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+  }
+
+  .book-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px dotted var(--rule);
+    align-items: flex-start;
+  }
+
+  .book-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--crimson);
+    min-width: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .book-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .book-author {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+  }
+
+  .book-why {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ── REFERENCES ── */
+  .references ol {
+    padding-left: 20px;
+  }
+
+  .references li {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 10px;
+    font-family: 'Lora', serif;
+  }
+
+  .references li em { font-style: italic; color: var(--ink-light); }
+
+  /* ── FOOTNOTE ── */
+  .footnote-box {
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    margin: 40px 0 0;
+    border-radius: 2px;
+  }
+
+  .footnote-box p {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+
+  .data-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    padding: 4px 10px;
+    display: inline-block;
+    margin-bottom: 4px;
+  }
+
+  sup { font-size: 10px; color: var(--crimson); }
+
+  /* ── LINKS ── */
+  a { color: var(--crimson); text-decoration: none; border-bottom: 1px solid #D6A0A0; transition: border-color 0.15s, color 0.15s; }
+  a:hover { color: var(--crimson-light); border-bottom-color: var(--crimson-light); }
+  a.ext::after { content: ' ↗'; font-size: 10px; opacity: 0.6; }
+  .thinker-book a, .book-why a { font-size: inherit; }
+  .references a { border-bottom-style: dotted; }
+
+  /* ── STICKY TOC ── */
+  .toc-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--ink);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc-bar::-webkit-scrollbar { display: none; }
+  .toc-bar a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #A8A29E;
+    border-bottom: none;
+    padding: 10px 14px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 0.15s, background 0.15s;
+  }
+  .toc-bar a:hover { color: #FAF7F2; background: rgba(255,255,255,0.08); border-bottom: none; }
+  .toc-bar .toc-divider { color: #3F3F3F; padding: 0 2px; font-size: 10px; }
+
+  /* ── SOURCE BADGE ── */
+  .src-link {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: var(--crimson);
+    color: #FAF7F2 !important;
+    border: none !important;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-left: 6px;
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+  }
+  .src-link:hover { background: var(--crimson-light) !important; color: #FAF7F2 !important; border: none !important; }
+
+  /* ── INDIA BOX ── */
+  .india-highlight {
+    background: #1C1917;
+    color: #FAF7F2;
+    padding: 28px 32px;
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+
+  .india-highlight h3 {
+    color: #FCA5A5;
+    font-style: normal;
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  .india-highlight p { color: #D6D3D1; margin-bottom: 10px; }
+  .india-highlight strong { color: #FAF7F2; }
+  .india-highlight .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #3F3F3F;
+  }
+  .india-highlight .stat {
+    text-align: center;
+  }
+  .india-highlight .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #FAF7F2;
+    line-height: 1;
+  }
+  .india-highlight .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: #A8A29E;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* ── SCENARIOS TABLE ── */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .scenario-card {
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .scenario-header {
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .scenario-body {
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .scenario-body li { margin-bottom: 6px; margin-left: 16px; }
+
+  .scen-1 .scenario-header { background: #14532D; color: #D1FAE5; }
+  .scen-2 .scenario-header { background: #92400E; color: #FEF3C7; }
+
+  @media (max-width: 600px) {
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .thinker-grid { grid-template-columns: 1fr; }
+    .scenario-grid { grid-template-columns: 1fr; }
+    .class-bar-label { width: 130px; font-size: 10px; }
+    .paper-cover { padding: 40px 20px 28px; }
+    .paper-body { padding: 0 20px 60px; }
+    h1 { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="journal-header">
+  Working Paper · Speculative Political Economy · August 2026 · Draft for Review
+</div>
+
+<nav class="toc-bar">
+  <a href="#s1">§1 Intro</a><span class="toc-divider">·</span>
+  <a href="#s2">§2 History</a><span class="toc-divider">·</span>
+  <a href="#s3">§3 Class Model</a><span class="toc-divider">·</span>
+  <a href="#s4">§4 India</a><span class="toc-divider">·</span>
+  <a href="#s5">§5 Data</a><span class="toc-divider">·</span>
+  <a href="#s6">§6 Scenarios</a><span class="toc-divider">·</span>
+  <a href="#s7">§7 Policy</a><span class="toc-divider">·</span>
+  <a href="#s8">§8 Conclusion</a><span class="toc-divider">·</span>
+  <a href="#refs">References</a>
+</nav>
+
+<div class="paper-cover">
+  <div class="paper-label">Research Paper — Speculative Political Economy &amp; Labour Studies</div>
+  <h1>The <em>Great Hollowing:</em><br>Artificial Intelligence, Labour Displacement, and the Emergence of a New Class Architecture</h1>
+  <p class="subtitle">With Special Reference to India's Structural Vulnerability in the Age of Cognitive Automation</p>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Domain</strong><br>AI · Labour Economics · Inequality</div>
+    <div class="meta-item"><strong>Region Focus</strong><br>India (Global Context)</div>
+    <div class="meta-item"><strong>Horizon</strong><br>2025 — 2075</div>
+    <div class="meta-item"><strong>Status</strong><br>Working Draft · Peer Review Pending</div>
+  </div>
+</div>
+
+<div class="paper-body">
+
+  <!-- ABSTRACT -->
+  <div class="abstract-box">
+    <span class="section-eyebrow">Abstract</span>
+    <p>
+      This paper proposes a six-class stratification framework for post-AI economies, arguing that the "execution middle" — the vast service class built on routine cognitive labor — is structurally vulnerable to near-elimination. Using historical transitions (pre-industrial, industrial, and globalization eras) as comparative anchors, we trace how each technological wave transformed class topology. We argue that AI represents a qualitatively different disruption: unlike prior waves that displaced physical or low-skill labor, AI simultaneously automates the cognitive labor on which the post-1991 Indian services miracle was built. India's unique trajectory — having bypassed industrialization to build an economy on white-collar services — exposes it to disproportionate structural unemployment risk. We outline two divergent 2075 scenarios and close with policy implications and research gaps for scholars working at the intersection of AI, labor, and development economics.
+    </p>
+    <p style="margin-top:12px; margin-bottom:0;">
+      <strong>Keywords:</strong> labour market polarization · cognitive automation · India services economy · class stratification · AI inequality · demographic dividend · UBI · structural unemployment
+    </p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section" id="s1">
+    <span class="section-eyebrow">Section 1</span>
+    <h2>Introduction: The End of the Meritocratic Promise</h2>
+
+    <p>
+      For two generations, the implicit contract of development economics held: invest in education, acquire skills, work hard, and economic mobility follows. This contract — formalized through institutions of schooling, professional certification, and organized labor — was the engine of the post-war middle class in Europe and North America, and the post-liberalization services class in India.
+    </p>
+
+    <p>
+      Artificial intelligence, and specifically the rapid maturation of large language models, reasoning engines, and multimodal AI systems after 2022, challenges this contract at its foundation. When cognition itself becomes a commodity — purchasable, scalable, and increasingly superior to average human performance — the question is no longer whether disruption will occur, but <strong>who absorbs its cost and who captures its surplus.</strong>
+    </p>
+
+    <p>
+      This paper does not argue that AI will eliminate all work. It argues something more structural and more uncomfortable: that AI will selectively hollow out the middle of the labor market, compress the middle class from both ends, and — absent deliberate policy intervention — reproduce a class topology reminiscent of pre-industrial feudalism, but with AI infrastructure replacing land as the primary differentiator of economic power.
+    </p>
+
+    <div class="pull-quote">
+      <p>"The question is not whether the technology will change the economy. It always does. The question is whether the gains will be broadly shared or narrowly captured. That is a political choice, not a technological inevitability."</p>
+      <cite>— <a href="https://www.basicbooks.com/titles/daron-acemoglu/power-and-progress/9781541702530/" target="_blank" class="ext">Daron Acemoglu &amp; Simon Johnson, <em>Power and Progress</em> (2023)</a></cite>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section" id="s2">
+    <span class="section-eyebrow">Section 2</span>
+    <h2>Historical Transitions: A Comparative Framework</h2>
+
+    <p>Each major technological transition reorganized the factors of production, and with them, the class structure. The table below maps four eras by their primary differentiator — the resource that separated economic winners from losers.</p>
+
+    <div class="timeline">
+      <div class="tl-era">
+        <div class="tl-era-num">ERA 01</div>
+        <div class="tl-era-name">Pre-Industrial</div>
+        <div class="tl-era-period">Pre-1760</div>
+        <div class="tl-era-differentiator">
+          <strong>Primary Differentiator</strong>
+          Land ownership. Hereditary. Birthright determined outcome entirely. Hard work sustained life; it did not change class.
+        </div>
+      </div>
+      <div class="tl-era">
+        <div class="tl-era-num">ERA 02</div>
+        <div class="tl-era-name">Industrial Revolution</div>
+        <div class="tl-era-period">1760–1900</div>
+        <div class="tl-era-differentiator">
+          <strong>Primary Differentiator</strong>
+          Capital ownership (factories, machines). Muscle labor devalued. 60–80 years of acute social pain before unions + literacy created a middle class.
+        </div>
+      </div>
+      <div class="tl-era">
+        <div class="tl-era-num">ERA 03</div>
+        <div class="tl-era-name">Globalization + IT</div>
+        <div class="tl-era-period">1990–2025</div>
+        <div class="tl-era-differentiator">
+          <strong>Primary Differentiator</strong>
+          Human capital: education + skill. For the first time, individual effort could override geography. The most democratic disruption in history.
+        </div>
+      </div>
+      <div class="tl-era era-ai">
+        <div class="tl-era-num">ERA 04</div>
+        <div class="tl-era-name">Cognitive AI</div>
+        <div class="tl-era-period">2025–2075</div>
+        <div class="tl-era-differentiator">
+          <strong>Primary Differentiator</strong>
+          AI infrastructure access: compute, data, proprietary models. Capital + structured thought. Human effort largely decorrelated from output.
+        </div>
+      </div>
+    </div>
+
+    <h3>The Critical Difference This Time</h3>
+
+    <p>Each prior transition created a buffer period — a decades-long window during which displaced workers could retrain, institutions could adapt, and policy could respond. The industrial revolution took roughly 60–80 years to settle into a new equilibrium (<a href="https://press.princeton.edu/books/hardcover/9780691172798/the-technology-trap" target="_blank" class="ext">Frey, 2019</a>). Globalization's disruptions unfolded over 30–40 years.</p>
+
+    <p>
+      AI's compression timeline is fundamentally different. <strong>The technology automates both the original jobs and the new jobs created to manage the automation — often within the same 5–10 year window.</strong> A generation that retrained from data entry to "AI prompt engineering" finds that skill commoditized within three years. There is no stable landing zone.
+    </p>
+
+    <p>
+      Moreover, prior disruptions primarily displaced physical or low-skilled labor, leaving the cognitive class largely intact to capture the surplus. AI inverts this: it is specifically designed to replicate cognitive output — writing, coding, analysis, legal reasoning, medical diagnosis — which is precisely the labor the middle class sold.
+    </p>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section" id="s3">
+    <span class="section-eyebrow">Section 3</span>
+    <h2>The New Class Architecture: A Proposed Framework</h2>
+
+    <p>We propose the following six-class stratification as the likely equilibrium endpoint of advanced AI economies by 2075. This is not a normative model — it is a structural prediction absent significant redistributive policy intervention.</p>
+
+    <div class="pyramid-container">
+      <div class="class-bar bar-capital">
+        <div class="class-bar-label">Class I<br>Capital Class</div>
+        <div class="class-bar-fill">
+          <div class="class-pct">~1%</div>
+          <div>AI infrastructure owners. Compute, proprietary data, foundation model access. Generational wealth now means <em>generational leverage</em> — systems that produce value without labor input. <span>Security: Absolute</span></div>
+        </div>
+      </div>
+      <div class="class-bar bar-expert">
+        <div class="class-bar-label">Class II<br>Expert Survivors</div>
+        <div class="class-bar-fill">
+          <div class="class-pct">~8%</div>
+          <div>Top 15–20% of each licensed profession. Surgeons (not radiologists), trial lawyers (not document reviewers), architects with signature practice. Valued for judgment + accountability, not information processing. <span>Security: High, shrinking</span></div>
+        </div>
+      </div>
+      <div class="class-bar bar-human">
+        <div class="class-bar-label">Class III<br>Human Premium</div>
+        <div class="class-bar-fill">
+          <div class="class-pct">~6%</div>
+          <div>Valued for being human and present — therapists, high-end teachers, performers, spiritual leaders, community anchors, elite chefs. Human becomes the luxury product in an AI-saturated world. <span>Security: Moderate, may grow</span></div>
+        </div>
+      </div>
+      <div class="class-bar bar-physical">
+        <div class="class-bar-label">Class IV<br>Physical World</div>
+        <div class="class-bar-fill">
+          <div class="class-pct">~12%</div>
+          <div>Electricians, plumbers, construction workers, mechanics. Counter-intuitively resilient — unstructured physical environments are robotics' hardest problem. Cannot be replaced remotely. Irony: the "low-status" job had high structural security. <span>Security: Moderate, capped</span></div>
+        </div>
+      </div>
+      <div class="class-bar bar-displaced">
+        <div class="class-bar-label">Class V<br>Displaced Middle</div>
+        <div class="class-bar-fill">
+          <div class="class-pct">~28%</div>
+          <div>Former execution middle — bank clerks, BPO, junior IT, insurance agents, content writers, middle management. Previously solid middle class. Now in structural freefall with no clear re-entry point. <span>Security: Very low → declining</span></div>
+        </div>
+      </div>
+      <div class="class-bar bar-poor">
+        <div class="class-bar-label">Class VI<br>Structural Poor</div>
+        <div class="class-bar-fill">
+          <div class="class-pct">~45%</div>
+          <div>Existing poor + newly displaced. No AI access, no physical skill premium, no human premium. Economic irrelevance. The category that grows fastest. Requires explicit redistribution policy to survive. <span>Security: Catastrophic</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:16px;">
+      <span class="data-note">NOTE</span> Percentages are illustrative projections for developing economies (India-context) under a business-as-usual policy scenario. Not sourced from a single study — synthesized from labor polarization literature. Verify against McKinsey Global Institute, ILO, and WEF Future of Jobs data before publication.
+    </p>
+
+    <h3>What Disappears: The "Execution Middle"</h3>
+
+    <p>
+      The class that does not appear in the 2075 framework is the one that dominated the 2000–2025 economy: the <strong>execution middle</strong> — workers who processed information, applied standardized judgment, served as organizational middleware between experts and consumers. This includes virtually all routine knowledge work: junior accountants, compliance officers, HR generalists, data entry teams, customer service operations, mid-tier IT developers, research associates.
+    </p>
+
+    <p>
+      These workers were the backbone of India's post-1991 growth story. They are the primary target of AI automation. And they have no obvious successor role to transition into — because AI is simultaneously automating the "new jobs" created to manage AI systems.
+    </p>
+  </div>
+
+  <!-- SECTION 4 — INDIA -->
+  <div class="section" id="s4">
+    <span class="section-eyebrow">Section 4</span>
+    <h2>India: The Unique Structural Vulnerability</h2>
+
+    <p>
+      India's development trajectory makes it disproportionately exposed to AI-driven labor displacement. To understand why, one must trace India's structural transformation — or, more precisely, the transformation that did not happen.
+    </p>
+
+    <div class="india-highlight">
+      <h3>India's Missing Industrial Revolution</h3>
+      <p>
+        Most advanced economies followed a predictable sequence: agriculture → manufacturing → services. The industrial phase built factories, urban infrastructure, trade unions, and a physically-skilled working class capable of transitioning upward as economies matured.
+      </p>
+      <p>
+        <strong>India largely skipped this phase.</strong> Post-1991 liberalization catapulted India directly from an agrarian economy into a services economy, primarily through IT, ITES, and financial services. China built factories; India built call centers and software parks.
+      </p>
+      <p>
+        This was celebrated as a leapfrog. It may prove to be a trap. The labor that leapfrogged — English-speaking, educated, affordable white-collar workers — is precisely the labor AI is designed to replace.
+      </p>
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-num">~50%</div>
+          <div class="stat-label">Services share<br>of India GDP</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~32%</div>
+          <div class="stat-label">Services share<br>of employment</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~45%</div>
+          <div class="stat-label">Agriculture share<br>of employment</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">~19%</div>
+          <div class="stat-label">Manufacturing<br>share of employment</div>
+        </div>
+      </div>
+    </div>
+
+    <p><span class="data-note">VERIFY</span> Figures above are approximate, based on PLFS/CSO data circa 2022–24. Cross-check with latest Annual Report of the Ministry of Labour & Employment before publication.</p>
+
+    <h3>The Demographic Dividend Becomes Demographic Risk</h3>
+
+    <p>
+      India's much-celebrated demographic dividend — the largest working-age population in human history entering the labor force through the 2030s — was premised on the availability of white-collar and services jobs to absorb educated youth. That premise is now structurally compromised.
+    </p>
+
+    <p>
+      If AI systems displace 30–50% of services employment over 20 years, India would be producing millions of graduates per year with credentials optimized for jobs that no longer exist, entering a labor market that cannot absorb them. The dividend becomes a deficit — potentially the largest structural unemployment crisis any country has faced since the Great Depression.
+    </p>
+
+    <h3>The Gini Trajectory</h3>
+
+    <p>
+      India already has severe wealth concentration. Estimates from <a href="https://www.oxfamindia.org/knowledge-hub/official-publication/survival-richest" target="_blank" class="ext">Oxfam India's Inequality Report 2023</a> suggest the top 1% holds approximately 40% of national wealth, with the top 10% controlling upward of 77%. The AI transition would accelerate this trajectory dramatically: as AI infrastructure becomes the primary value-generating asset, and that infrastructure concentrates in the hands of the already-wealthy (domestically and globally), Gini coefficients could reach levels last seen in feudal economies.
+    </p>
+
+    <p><span class="data-note">VERIFY</span> <a href="https://www.oxfamindia.org/knowledge-hub/official-publication/survival-richest" target="_blank" class="ext">Oxfam India Inequality Report 2023</a> · <a href="https://wid.world/country/india/" target="_blank" class="ext">World Inequality Database — India Gini series</a>. Note: Gini measures income inequality; wealth Gini is substantially higher.</p>
+  </div>
+
+  <!-- SECTION 5 — DATA -->
+  <div class="section" id="s5">
+    <span class="section-eyebrow">Section 5</span>
+    <h2>Key Data Evidence: Automation Risk by Occupation</h2>
+
+    <p>The seminal quantitative work on automation risk remains the 2013 Oxford study by Frey and Osborne, subsequently extended and challenged by multiple research groups. The table below synthesizes findings across major studies, mapped to the class framework proposed above.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Occupation Category</th>
+          <th>Automation Risk</th>
+          <th>Class Mapping</th>
+          <th>Primary Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Radiologists, diagnostic physicians</td>
+          <td class="risk-high">High (70–85%)</td>
+          <td>Class II → VI (fall)</td>
+          <td><a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" target="_blank" class="ext">Frey &amp; Osborne 2013</a>; Topol 2019</td>
+        </tr>
+        <tr>
+          <td>Legal document review, paralegal</td>
+          <td class="risk-high">High (75–90%)</td>
+          <td>Class V (execution middle)</td>
+          <td><a href="https://www.mckinsey.com/featured-insights/future-of-work/a-future-that-works" target="_blank" class="ext">McKinsey GI 2017</a>; Susskind 2015</td>
+        </tr>
+        <tr>
+          <td>Customer service, BPO</td>
+          <td class="risk-high">High (80–95%)</td>
+          <td>Class V → VI</td>
+          <td><a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" target="_blank" class="ext">Frey &amp; Osborne 2013</a>; <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023/" target="_blank" class="ext">WEF 2023</a></td>
+        </tr>
+        <tr>
+          <td>Junior software development (CRUD, boilerplate)</td>
+          <td class="risk-high">High (55–75%)</td>
+          <td>Class V (displacement)</td>
+          <td>GitHub Copilot studies 2023–24; <a href="https://www.mckinsey.com/featured-insights/future-of-work/a-future-that-works" target="_blank" class="ext">McKinsey GI</a></td>
+        </tr>
+        <tr>
+          <td>Middle management (routine coordination)</td>
+          <td class="risk-high">High (60–80%)</td>
+          <td>Class V</td>
+          <td><a href="https://www.nber.org/papers/w25684" target="_blank" class="ext">Autor 2019</a>; <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023/" target="_blank" class="ext">WEF Future of Jobs 2023</a></td>
+        </tr>
+        <tr>
+          <td>Surgeons, specialist interventionists</td>
+          <td class="risk-low">Low (&lt;15%)</td>
+          <td>Class II (survive)</td>
+          <td><a href="https://www.nber.org/papers/w25684" target="_blank" class="ext">Acemoglu &amp; Restrepo</a></td>
+        </tr>
+        <tr>
+          <td>Electricians, plumbers, mechanical trades</td>
+          <td class="risk-low">Low (10–20%)</td>
+          <td>Class IV (resilient)</td>
+          <td><a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" target="_blank" class="ext">Frey &amp; Osborne 2013</a>; <a href="https://workofthefuture.mit.edu/" target="_blank" class="ext">Autor 2019</a></td>
+        </tr>
+        <tr>
+          <td>Psychotherapists, counselors</td>
+          <td class="risk-low">Low (&lt;20%)</td>
+          <td>Class III (human premium)</td>
+          <td><a href="https://secondmachineage.com/" target="_blank" class="ext">Brynjolfsson &amp; McAfee 2014</a></td>
+        </tr>
+        <tr>
+          <td>Performing artists, musicians</td>
+          <td class="risk-med">Medium (25–40%)</td>
+          <td>Class III (top tier survives)</td>
+          <td>Mixed — contested in literature</td>
+        </tr>
+        <tr>
+          <td>Agricultural labor (unstructured field work)</td>
+          <td class="risk-med">Medium (30–50%)</td>
+          <td>Class VI risk (margin)</td>
+          <td><a href="https://www.ilo.org/global/research/global-reports/weso/2018/lang--en/index.htm" target="_blank" class="ext">ILO 2018</a>; FAO 2022</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><span class="data-note">NOTE</span> All automation risk percentages are probability estimates from cited studies. Methodologies differ: <a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" target="_blank" class="ext">Frey &amp; Osborne</a> use task-based susceptibility scoring; <a href="https://www.mckinsey.com/featured-insights/future-of-work/a-future-that-works" target="_blank" class="ext">McKinsey</a> uses time-on-task decomposition. Numbers are directional signals, not precise predictions.</p>
+
+    <h3>The 47% Number and Its Critics</h3>
+
+    <p>
+      <a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" target="_blank" class="ext">Frey and Osborne's landmark 2013 paper</a> estimated that approximately 47% of US jobs were at high risk of automation within "one or two decades." This number has been both widely cited and vigorously contested. Critics (notably <a href="https://www.oecd-ilibrary.org/social-issues-migration-health/the-risk-of-automation-for-jobs-in-oecd-countries_5jlz9h56dvq7-en" target="_blank" class="ext">Arntz, Gregory, and Zierahn, 2016, commissioned by the OECD</a>) argued that a task-level analysis — looking at whether specific tasks within a job are automatable, rather than entire jobs — yields a far lower estimate of ~9% for OECD economies.
+    </p>
+
+    <p>
+      The debate matters for this paper's thesis: if the task-level analysis is correct, AI primarily transforms jobs rather than eliminating them. If the occupation-level analysis is correct, mass displacement follows. The emerging evidence from 2022–2026 — with GPT-4 class models demonstrating competence across legal, medical, coding, and analytical tasks simultaneously — suggests the Frey-Osborne framing may have been directionally correct, even if the timeline was compressed.
+    </p>
+  </div>
+
+  <!-- SECTION 6 — SCENARIOS -->
+  <div class="section" id="s6">
+    <span class="section-eyebrow">Section 6</span>
+    <h2>Two Scenarios for India in 2075</h2>
+
+    <p>History offers precedent for two divergent responses to technology-driven mass displacement. The 1930s Depression produced the New Deal in the United States and fascism in Germany — the same economic crisis, two political responses. India's trajectory will be shaped by choices made in the 2025–2040 window.</p>
+
+    <div class="scenario-grid">
+      <div class="scenario-card scen-1">
+        <div class="scenario-header">Scenario A — Managed Transition</div>
+        <div class="scenario-body">
+          <p>Requires deliberate, politically difficult choices:</p>
+          <ul>
+            <li>Progressive taxation of AI-derived capital income</li>
+            <li>Universal Basic Income funded at scale (₹6,000–₹10,000/month at 2025 value, inflation-adjusted)</li>
+            <li>Massive public investment in vernacular, offline-capable AI access infrastructure</li>
+            <li>Education reform away from rote credential production toward judgment, ethics, physical trades</li>
+            <li>Regulatory frameworks governing AI deployment in labor-intensive sectors</li>
+            <li>Social re-valuation of physical and care work</li>
+          </ul>
+          <p style="margin-top:10px;"><strong>Probability:</strong> Low under current political economy. Requires a coalition that does not yet exist.</p>
+        </div>
+      </div>
+      <div class="scenario-card scen-2">
+        <div class="scenario-header">Scenario B — Unmanaged Polarization</div>
+        <div class="scenario-body">
+          <p>The default trajectory without intervention:</p>
+          <ul>
+            <li>Gini coefficient rises to 0.65–0.70 range (feudal-level inequality)</li>
+            <li>30–40% structural unemployment in working-age population</li>
+            <li>Political instability — populism, nativist movements, scapegoating</li>
+            <li>Privatized AI benefits; socialized AI disruption costs</li>
+            <li>Massive urban-rural divergence; hill towns and rural areas abandoned</li>
+            <li>Education system produces millions of graduates for non-existent jobs</li>
+          </ul>
+          <p style="margin-top:10px;"><strong>Probability:</strong> High under current trajectory. The market alone will not self-correct.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 — POLICY -->
+  <div class="section" id="s7">
+    <span class="section-eyebrow">Section 7</span>
+    <h2>Policy Implications and Research Gaps</h2>
+
+    <p>This paper raises several questions that remain underexplored in existing literature, particularly in the Indian context. We identify these as priority research agenda items:</p>
+
+    <p><strong>1. Vernacular AI Access as Infrastructure:</strong> What would a JAM-equivalent (Jan Dhan, Aadhaar, Mobile) infrastructure for AI access look like? Can offline-capable, Hindi/regional-language AI be deployed at the scale India's displacement would require? This is a genuine research and engineering problem with almost no serious academic treatment.</p>
+
+    <p><strong>2. The Care Economy Absorber Hypothesis:</strong> <a href="https://www.aisuperpowers.com/" target="_blank" class="ext">Kai-Fu Lee</a> proposes that care work (elder care, childcare, disability support) will absorb displaced workers. This may be true in advanced economies with aging populations. India's demographic structure is different. Does the Care Economy absorber work at India's scale and income level?</p>
+
+    <p><strong>3. Physical Trades Revaluation:</strong> If Class IV (plumbers, electricians) is structurally more resilient than Class V (BPO, junior IT), does India's vocational education system reflect this? Current evidence suggests it does not — ITI training is socially stigmatized, underfunded, and misaligned with actual trade demand.</p>
+
+    <p><strong>4. Digital Payments as Access Gateway:</strong> India's UPI-based payment infrastructure is, arguably, the world's most successful AI-adjacent democratization of financial access. Does this model generalize to AI access? The merchant economics of digital payment adoption — barriers, incentives, trust — may offer instructive analogs for AI adoption in underserved populations. (This connection links directly to ongoing doctoral research on merchant economics of digital payments.)</p>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div class="section" id="s8">
+    <span class="section-eyebrow">Section 8</span>
+    <h2>Conclusion</h2>
+
+    <p>
+      The framework presented in this paper converges on an uncomfortable thesis: that the AI transition, unlike prior technological waves, will hollow the middle of the class distribution rather than simply disrupting and then re-employing displaced workers. The primary casualty is the "execution middle" — the routine cognitive labor class on which India's post-1991 growth was built.
+    </p>
+
+    <p>
+      India faces a unique structural vulnerability: having leapfrogged industrialization into a services economy, it has no manufacturing base to absorb the displaced, and a demographic trajectory that will produce the largest working-age population in history precisely as AI automates the jobs that population was educated to fill.
+    </p>
+
+    <p>
+      Hard work will continue to matter — but it will matter for a declining percentage of people. <a href="https://piketty.pse.ens.fr/en/capital21c2" target="_blank" class="ext">Piketty's r &gt; g thesis</a> applies with full force here: when capital returns outpace growth, the advantage compounds with each generation. Education will continue to matter — but the type that will matter is precisely the type that current Indian educational institutions do not prioritize: critical judgment, ethical reasoning, embodied physical skill, and the capacity to direct AI systems rather than compete with them.
+    </p>
+
+    <p>
+      The gap will widen. The historical precedent — the industrial revolution — suggests that technological disruption eventually produces new equilibria. But it also suggests that the transition is measured in generations, not years, and that the political response during the transition determines whether the new equilibrium is democratic or authoritarian.
+    </p>
+
+    <p>
+      <strong>The window for choosing is now. And it is closing.</strong>
+    </p>
+  </div>
+
+  <!-- REFERENCES -->
+  <div class="section references" id="refs">
+    <span class="section-eyebrow">References</span>
+    <h2>Selected Bibliography</h2>
+
+    <p><span class="data-note">IMPORTANT</span> Citations below have been synthesized from memory and may contain inaccuracies in publication years, journal names, co-authors, or page numbers. All references must be independently verified against Google Scholar, JSTOR, or NBER before submission to any journal or conference. This is a working draft bibliography.</p>
+
+    <ol>
+      <li>Acemoglu, D., &amp; Johnson, S. (2023). <a href="https://www.basicbooks.com/titles/daron-acemoglu/power-and-progress/9781541702530/" class="ext" target="_blank"><em>Power and Progress: Our Thousand-Year Struggle Over Technology and Prosperity.</em></a> Basic Books.</li>
+      <li>Acemoglu, D., &amp; Restrepo, P. (2019). <a href="https://www.nber.org/papers/w25684" class="ext" target="_blank">Automation and New Tasks: How Technology Displaces and Reinstates Labor.</a> <em>Journal of Economic Perspectives, 33</em>(2), 3–30. <a href="https://www.nber.org/papers/w25684" class="src-link" target="_blank">NBER Free ↗</a></li>
+      <li>Autor, D. H. (2019). <a href="https://workofthefuture.mit.edu/research-post/work-of-the-past-work-of-the-future/" class="ext" target="_blank">Work of the Past, Work of the Future.</a> <em>AEA Papers and Proceedings, 109</em>, 1–32.</li>
+      <li>Autor, D. H., Levy, F., &amp; Murnane, R. J. (2003). <a href="https://www.nber.org/papers/w9178" class="ext" target="_blank">The Skill Content of Recent Technological Change.</a> <em>Quarterly Journal of Economics, 118</em>(4), 1279–1333. <a href="https://www.nber.org/papers/w9178" class="src-link" target="_blank">NBER ↗</a></li>
+      <li>Baldwin, R. (2019). <a href="https://global.oup.com/academic/product/the-globotics-upheaval-9780190901769" class="ext" target="_blank"><em>The Globotics Upheaval: Globalization, Robotics, and the Future of Work.</em></a> Oxford University Press.</li>
+      <li>Brynjolfsson, E., &amp; McAfee, A. (2014). <a href="https://secondmachineage.com/" class="ext" target="_blank"><em>The Second Machine Age: Work, Progress, and Prosperity in a Time of Brilliant Technologies.</em></a> W. W. Norton.</li>
+      <li>Cowen, T. (2013). <a href="https://www.penguinrandomhouse.com/books/220935/average-is-over-by-tyler-cowen/" class="ext" target="_blank"><em>Average Is Over: Powering America Beyond the Age of the Great Stagnation.</em></a> Dutton.</li>
+      <li>Eloundou, T., Manning, S., Mishkin, P., &amp; Rock, D. (2023). <a href="https://arxiv.org/abs/2303.10130" class="ext" target="_blank">GPTs are GPTs: An Early Look at the Labor Market Impact Potential of Large Language Models.</a> <em>arXiv:2303.10130.</em> <a href="https://arxiv.org/abs/2303.10130" class="src-link" target="_blank">arXiv Free ↗</a></li>
+      <li>Ford, M. (2015). <a href="https://www.basicbooks.com/titles/martin-ford/rise-of-the-robots/9780465097531/" class="ext" target="_blank"><em>Rise of the Robots: Technology and the Threat of a Jobless Future.</em></a> Basic Books.</li>
+      <li>Frey, C. B. (2019). <a href="https://press.princeton.edu/books/hardcover/9780691172798/the-technology-trap" class="ext" target="_blank"><em>The Technology Trap: Capital, Labor, and Power in the Age of Automation.</em></a> Princeton University Press.</li>
+      <li>Frey, C. B., &amp; Osborne, M. A. (2013). <a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" class="ext" target="_blank">The Future of Employment: How Susceptible Are Jobs to Computerisation?</a> <em>Oxford Martin School Working Paper.</em> <a href="https://www.oxfordmartin.ox.ac.uk/downloads/academic/The_Future_of_Employment.pdf" class="src-link" target="_blank">Free PDF ↗</a></li>
+      <li>Harari, Y. N. (2016). <a href="https://www.ynharari.com/book/homo-deus/" class="ext" target="_blank"><em>Homo Deus: A Brief History of Tomorrow.</em></a> Harper.</li>
+      <li>ILO (2018). <a href="https://www.ilo.org/global/research/global-reports/weso/2018/lang--en/index.htm" class="ext" target="_blank"><em>World Employment and Social Outlook 2018: Greening with Jobs.</em></a> International Labour Organization.</li>
+      <li>Lee, K. F. (2018). <a href="https://www.aisuperpowers.com/" class="ext" target="_blank"><em>AI Superpowers: China, Silicon Valley, and the New World Order.</em></a> Houghton Mifflin Harcourt.</li>
+      <li>McKinsey Global Institute (2017). <a href="https://www.mckinsey.com/featured-insights/future-of-work/a-future-that-works" class="ext" target="_blank"><em>A Future That Works: Automation, Employment, and Productivity.</em></a> McKinsey &amp; Company. <a href="https://www.mckinsey.com/featured-insights/future-of-work/a-future-that-works" class="src-link" target="_blank">Free Report ↗</a></li>
+      <li>Oxfam India (2023). <a href="https://www.oxfamindia.org/knowledge-hub/official-publication/survival-richest" class="ext" target="_blank"><em>Survival of the Richest: The India Story.</em></a> Oxfam India Report. <a href="https://www.oxfamindia.org/knowledge-hub/official-publication/survival-richest" class="src-link" target="_blank">Free ↗</a></li>
+      <li>Piketty, T. (2014). <a href="https://www.hup.harvard.edu/books/9780674430006" class="ext" target="_blank"><em>Capital in the Twenty-First Century</em></a> (A. Goldhammer, Trans.). Harvard University Press. — <a href="https://piketty.pse.ens.fr/en/capital21c2" class="ext" target="_blank">Data &amp; appendix free at piketty.pse.ens.fr</a></li>
+      <li>Rajan, R. G. (2019). <a href="https://www.penguinrandomhouse.com/books/588998/the-third-pillar-by-raghuram-rajan/" class="ext" target="_blank"><em>The Third Pillar: How Markets and the State Leave the Community Behind.</em></a> Penguin Press.</li>
+      <li>World Economic Forum (2023). <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023/" class="ext" target="_blank"><em>The Future of Jobs Report 2023.</em></a> World Economic Forum. <a href="https://www.weforum.org/reports/the-future-of-jobs-report-2023/" class="src-link" target="_blank">Free Download ↗</a></li>
+      <li>Zuboff, S. (2019). <a href="https://shoshanazuboff.com/book/about/" class="ext" target="_blank"><em>The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power.</em></a> PublicAffairs.</li>
+    </ol>
+
+    <div style="margin-top:24px; padding:16px 20px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:2px;">
+      <p style="font-family:'JetBrains Mono',monospace; font-size:11px; color:#166534; margin-bottom:6px;">📊 KEY DATA SOURCES — BOOKMARK THESE</p>
+      <p style="font-size:13px; color:#166534; margin-bottom:4px;"><a href="https://wid.world/" target="_blank" style="color:#15803D;">wid.world</a> — World Inequality Database · Free India Gini &amp; wealth share data</p>
+      <p style="font-size:13px; color:#166534; margin-bottom:4px;"><a href="https://www.nber.org" target="_blank" style="color:#15803D;">nber.org</a> — National Bureau of Economic Research · All Acemoglu/Autor papers</p>
+      <p style="font-size:13px; color:#166534; margin-bottom:4px;"><a href="https://www.cmie.com/" target="_blank" style="color:#15803D;">cmie.com</a> — Centre for Monitoring Indian Economy · India labour market data</p>
+      <p style="font-size:13px; color:#166534; margin-bottom:4px;"><a href="https://mospi.gov.in/plfs-reports" target="_blank" style="color:#15803D;">mospi.gov.in/plfs-reports</a> — Periodic Labour Force Survey · India employment data</p>
+      <p style="font-size:13px; color:#166534;"><a href="https://data.worldbank.org/indicator/SI.POV.GINI?locations=IN" target="_blank" style="color:#15803D;">World Bank — India Gini Index time series</a></p>
+    </div>
+  </div>
+
+  <div class="footnote-box">
+    <p>⚠ WORKING DRAFT — NOT FOR CITATION</p>
+    <p>This paper is a structured working draft developed through exploratory intellectual dialogue. Data figures marked [VERIFY] require independent validation against primary sources. All percentage estimates in the class stratification model (Section 3) are illustrative projections, not statistically derived forecasts. All citations require verification before use in formal academic work.</p>
+    <p>The authors acknowledge that speculative political economy papers carry inherent uncertainty, and that the 50-year horizon makes falsifiability difficult. The value of this paper lies in its framework and research agenda, not in the precision of its predictions.</p>
+    <p style="margin-top:8px; color:#44403C;">Framework developed: August 2026 · India-focused speculative political economy</p>
+  </div>
+
+</div>
+</body>
+</html>
